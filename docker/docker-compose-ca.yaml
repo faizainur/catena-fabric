@@ -1,8 +1,8 @@
 version: '2.4'
 
 networks:
-  test:
-    name: fabric_test
+  catenaFabric:
+    name: catenaFabric
 
 services:
 
@@ -19,10 +19,10 @@ services:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ../organizations/ca/bankAOrg:/etc/hyperledger/fabric-ca-server
+      - ../organizations/fabric-ca/bankAOrg:/etc/hyperledger/fabric-ca-server
     container_name: ca_bankAOrg
     networks:
-      - test
+      - catenaFabric
 
   ca_bankBOrg:
     image: hyperledger/fabric-ca:latest
@@ -37,10 +37,10 @@ services:
       - "8054:8054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ../organizations/ca/bankBOrg:/etc/hyperledger/fabric-ca-server
+      - ../organizations/fabric-ca/bankBOrg:/etc/hyperledger/fabric-ca-server
     container_name: ca_bankBOrg
     networks:
-      - test
+      - catenaFabric
 
   ca_orderer:
     image: hyperledger/fabric-ca:latest
