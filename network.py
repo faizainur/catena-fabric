@@ -1,7 +1,9 @@
 import fire
-import cagen as ca
+import cagen as certgen
 import subprocess
 import os
+
+COMPOSE_FILE_FABRIC = "docker/docker-compose-net.yaml"
 
 def hello(name="World"):
     return "Hello %s" % name
@@ -9,17 +11,32 @@ def hello(name="World"):
 def init():
     ca.initContainer()
 
+def start(ca=False, fabric=False):
+    if ca:
+        print("Initiating Fabric CA...\n")
+        certgen.initContainer()
+    elif fabric:
+        print("Initiating Fabric...\n")
+        initFabricContainer()
+        
+def initFabricContainer():
+    subprocess.run(["docker-compose", "-f", COMPOSE_FILE_FABRIC, "up", "-d"])
+    subprocess.run(["docker", "ps"])
+
 def cagen():
     print("======= Creating bankAOrg Identities =======")
-    ca.createBankAOrg()
+    certgen.createBankAOrg()
     print("\n============================================")
 
     print("\n======= Creating bankBOrg Identities =======")
-    ca.createBankBOrg()
+    certgen.createBankBOrg()
     print("\n============================================")
 
+    # subprocess.run([""])
+    subprocess.run(["./organizations/ccp-generate.sh"])
+
     print("\n======= Creating orderer Identities =======")
-    ca.createOrderer()
+    certgen.createOrderer()
 
 def dldep(verbose=False):
     if verbose == False:
@@ -62,6 +79,13 @@ def dldep(verbose=False):
 
         print("\nAdd the binaries path to your PATH environment variables:") 
         print("\t", os.path.join(os.getcwd(), "bin"))
+
+def test(a=False, b=False):
+    if a:
+        print("Hello")
+        # subprocess.run(["./organizations/ccp-generate.sh"])
+    elif b:
+        print("World")
 
 
 if __name__ == '__main__':

@@ -26,21 +26,20 @@ def createBankAOrg():
                     "--caname", "ca-bankAOrg", "--tls.certfiles", tlsCertFilePath])
     
     configYamlPath = os.path.join(os.getcwd(), caClientHomePath, "msp", "config.yaml")
-    configNodeOUs = """
-    NodeOUs:
-    Enable: true
-    ClientOUIdentifier:
-        Certificate: cacerts/localhost-7054-ca-bankAOrg.pem
-        OrganizationalUnitIdentifier: client
-    PeerOUIdentifier:
-        Certificate: cacerts/localhost-7054-ca-bankAOrg.pem
-        OrganizationalUnitIdentifier: peer
-    AdminOUIdentifier:
-        Certificate: cacerts/localhost-7054-ca-bankAOrg.pem
-        OrganizationalUnitIdentifier: admin
-    OrdererOUIdentifier:
-        Certificate: cacerts/localhost-7054-ca-bankAOrg.pem
-        OrganizationalUnitIdentifier: orderer
+    configNodeOUs = """NodeOUs:
+  Enable: true
+  ClientOUIdentifier:
+    Certificate: cacerts/localhost-7054-ca-bankAOrg.pem
+    OrganizationalUnitIdentifier: client
+  PeerOUIdentifier:
+    Certificate: cacerts/localhost-7054-ca-bankAOrg.pem
+    OrganizationalUnitIdentifier: peer
+  AdminOUIdentifier:
+    Certificate: cacerts/localhost-7054-ca-bankAOrg.pem
+    OrganizationalUnitIdentifier: admin
+  OrdererOUIdentifier:
+    Certificate: cacerts/localhost-7054-ca-bankAOrg.pem
+    OrganizationalUnitIdentifier: orderer
     """
 
     # subprocess.run(["echo", configNodeOUs, ">", configYamlPath])
@@ -142,21 +141,20 @@ def createBankBOrg():
                     "--caname", "ca-bankBOrg", "--tls.certfiles", tlsCertFilePath])
     
     configYamlPath = os.path.join(os.getcwd(), caClientHomePath, "msp", "config.yaml")
-    configNodeOUs = """
-    NodeOUs:
-    Enable: true
-    ClientOUIdentifier:
-        Certificate: cacerts/localhost-8054-ca-bankBOrg.pem
-        OrganizationalUnitIdentifier: client
-    PeerOUIdentifier:
-        Certificate: cacerts/localhost-8054-ca-bankBOrg.pem
-        OrganizationalUnitIdentifier: peer
-    AdminOUIdentifier:
-        Certificate: cacerts/localhost-8054-ca-bankBOrg.pem
-        OrganizationalUnitIdentifier: admin
-    OrdererOUIdentifier:
-        Certificate: cacerts/localhost-8054-ca-bankBOrg.pem
-        OrganizationalUnitIdentifier: orderer
+    configNodeOUs = """NodeOUs:
+  Enable: true
+  ClientOUIdentifier:
+    Certificate: cacerts/localhost-8054-ca-bankBOrg.pem
+    OrganizationalUnitIdentifier: client
+  PeerOUIdentifier:
+    Certificate: cacerts/localhost-8054-ca-bankBOrg.pem
+    OrganizationalUnitIdentifier: peer
+  AdminOUIdentifier:
+    Certificate: cacerts/localhost-8054-ca-bankBOrg.pem
+    OrganizationalUnitIdentifier: admin
+  OrdererOUIdentifier:
+    Certificate: cacerts/localhost-8054-ca-bankBOrg.pem
+    OrganizationalUnitIdentifier: orderer
     """
 
     # subprocess.run(["echo", configNodeOUs, ">", configYamlPath])
@@ -258,21 +256,20 @@ def createOrderer():
                     "--caname", "ca-orderer", "--tls.certfiles", tlsCertFilePath])
     
     configYamlPath = os.path.join(os.getcwd(), caClientHomePath, "msp", "config.yaml")
-    configNodeOUs = """
-    NodeOUs:
-    Enable: true
-    ClientOUIdentifier:
-        Certificate: cacerts/localhost-9054-ca-orderer.pem
-        OrganizationalUnitIdentifier: client
-    PeerOUIdentifier:
-        Certificate: cacerts/localhost-9054-ca-orderer.pem
-        OrganizationalUnitIdentifier: peer
-    AdminOUIdentifier:
-        Certificate: cacerts/localhost-9054-ca-orderer.pem
-        OrganizationalUnitIdentifier: admin
-    OrdererOUIdentifier:
-        Certificate: cacerts/localhost-9054-ca-orderer.pem
-        OrganizationalUnitIdentifier: orderer
+    configNodeOUs = """NodeOUs:
+  Enable: true
+  ClientOUIdentifier:
+    Certificate: cacerts/localhost-9054-ca-orderer.pem
+    OrganizationalUnitIdentifier: client
+  PeerOUIdentifier:
+    Certificate: cacerts/localhost-9054-ca-orderer.pem
+    OrganizationalUnitIdentifier: peer
+  AdminOUIdentifier:
+    Certificate: cacerts/localhost-9054-ca-orderer.pem
+    OrganizationalUnitIdentifier: admin
+  OrdererOUIdentifier:
+    Certificate: cacerts/localhost-9054-ca-orderer.pem
+    OrganizationalUnitIdentifier: orderer
     """
 
     # subprocess.run(["echo", configNodeOUs, ">", configYamlPath])

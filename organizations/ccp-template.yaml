@@ -1,0 +1,35 @@
+---
+name: test-network-${ORG}Org
+version: 1.0.0
+client:
+  organization: ${ORG}Org
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  ${ORG}Org:
+    mspid: ${ORG}MSP
+    peers:
+    - peer0.${ORG}.catena.id
+    certificateAuthorities:
+    - ca.${ORG}.catena.id
+peers:
+  peer0.${ORG}.catena.id:
+    url: grpcs://localhost:${P0PORT}
+    tlsCACerts:
+      pem: |
+          ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer0.${ORG}.catena.id
+      hostnameOverride: peer0.${ORG}.catena.id
+certificateAuthorities:
+  ca.${ORG}.catena.id:
+    url: https://localhost:${CAPORT}
+    caName: ca-org${ORG}
+    tlsCACerts:
+      pem: 
+        - |
+          ${CAPEM}
+    httpOptions:
+      verify: false
