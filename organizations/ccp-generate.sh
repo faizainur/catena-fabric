@@ -29,8 +29,8 @@ function yaml_ccp {
 ORG=bankA
 P0PORT=7051
 CAPORT=7054
-PEERPEM=organizations/peerOrganizations/bankA.catena.id/tlsca/tlsca.peer0.bankA.catena.id-cert.pem
-CAPEM=organizations/peerOrganizations/org1.example.com/ca/ca.bankA.catena.id-cert.pem
+PEERPEM=organizations/peerOrganizations/bankA.catena.id/tlsca/tlsca.bankA.catena.id-cert.pem
+CAPEM=organizations/peerOrganizations/bankA.catena.id/ca/ca.bankA.catena.id-cert.pem
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/bankA.catena.id/connection-bankA.json
 echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/bankA.catena.id/connection-bankA.yaml
@@ -38,7 +38,7 @@ echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrga
 ORG=bankB
 P0PORT=9051
 CAPORT=8054
-PEERPEM=organizations/peerOrganizations/bankB.catena.id/tlsca/tlsca.peer0.bankB.catena.id-cert.pem
+PEERPEM=organizations/peerOrganizations/bankB.catena.id/tlsca/tlsca.bankB.catena.id-cert.pem
 CAPEM=organizations/peerOrganizations/bankB.catena.id/ca/ca.bankB.catena.id-cert.pem
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/bankB.catena.id/connection-bankB.json

@@ -17,8 +17,8 @@ networks:
 services:
 
   orderer.catena.id:
-    container_name: orderer.catena.di
-    image: hyperledger/fabric-orderer:latest
+    container_name: orderer.catena.id
+    image: hyperledger/fabric-orderer:2.3.2
     labels:
       service: hyperledger-fabric
     environment:
@@ -60,7 +60,7 @@ services:
 
   peer0.bankA.catena.id:
     container_name: peer0.bankA.catena.id
-    image: hyperledger/fabric-peer:latest
+    image: hyperledger/fabric-peer:2.3.2
     labels:
       service: hyperledger-fabric
     environment:
@@ -97,7 +97,7 @@ services:
 
   peer0.bankB.catena.id:
     container_name: peer0.bankB.catena.id
-    image: hyperledger/fabric-peer:latest
+    image: hyperledger/fabric-peer:2.3.2
     labels:
       service: hyperledger-fabric
     environment:
@@ -134,7 +134,7 @@ services:
 
   cli:
     container_name: cli
-    image: hyperledger/fabric-tools:latest
+    image: hyperledger/fabric-tools:2.3.2
     labels:
       service: hyperledger-fabric
     tty: true

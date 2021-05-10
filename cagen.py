@@ -102,7 +102,7 @@ def createBankAOrg():
     os.makedirs(os.path.join(caClientHomePath, "tlsca"))
     subprocess.run(["cp", 
         getFileFromDir(os.path.join(caClientHomePath, "peers", "peer0.bankA.catena.id", "tls", "tlscacerts")),
-        os.path.join(caClientHomePath, "tlsca", "tlsca.peer0.bankA.catena.id-cert.pem"),
+        os.path.join(caClientHomePath, "tlsca", "tlsca.bankA.catena.id-cert.pem"),
     ])
 
     os.makedirs(os.path.join(caClientHomePath, "ca"))
@@ -217,7 +217,7 @@ def createBankBOrg():
     os.makedirs(os.path.join(caClientHomePath, "tlsca"))
     subprocess.run(["cp", 
         getFileFromDir(os.path.join(caClientHomePath, "peers", "peer0.bankB.catena.id", "tls", "tlscacerts")),
-        os.path.join(caClientHomePath, "tlsca", "tlsca.peer0.bankB.catena.id-cert.pem"),
+        os.path.join(caClientHomePath, "tlsca", "tlsca.bankB.catena.id-cert.pem"),
     ])
 
     os.makedirs(os.path.join(caClientHomePath, "ca"))
