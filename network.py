@@ -32,6 +32,10 @@ def cagen():
     certgen.createBankBOrg()
     print("\n============================================")
 
+    print("\n======= Creating govOrg Identities =======")
+    certgen.createGovOrg()
+    print("\n============================================")
+
     # subprocess.run([""])
     subprocess.run(["./organizations/ccp-generate.sh"])
 

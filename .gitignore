@@ -1,5 +1,8 @@
 bin/
 
+chaincodes/asset-transfer-basic
+chaincodes/test-application
+
 organizations/peerOrganizations/
 organizations/ordererOrganizations/
 
@@ -23,3 +26,10 @@ organizations/fabric-ca/ordererOrg/tls-cert.pem
 organizations/fabric-ca/ordererOrg/fabric-ca-server.db
 organizations/fabric-ca/ordererOrg/IssuerPublicKey
 organizations/fabric-ca/ordererOrg/IssuerRevocationPublicKey
+
+organizations/fabric-ca/govOrg/ca-cert.pem
+organizations/fabric-ca/govOrg/msp
+organizations/fabric-ca/govOrg/tls-cert.pem
+organizations/fabric-ca/govOrg/fabric-ca-server.db
+organizations/fabric-ca/govOrg/IssuerPublicKey
+organizations/fabric-ca/govOrg/IssuerRevocationPublicKey

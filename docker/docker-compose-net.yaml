@@ -9,6 +9,7 @@ volumes:
   orderer.catena.id:
   peer0.bankA.catena.id:
   peer0.bankB.catena.id:
+  peer0.gov.catena.id:
 
 networks:
   catenaFabric:
@@ -129,6 +130,43 @@ services:
     command: peer node start
     ports:
       - "9051:9051"
+    networks:
+      - catenaFabric 
+
+  peer0.gov.catena.id:
+    container_name: peer0.gov.catena.id
+    image: hyperledger/fabric-peer:2.3.2
+    labels:
+      service: hyperledger-fabric
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=catenaFabric
+      - FABRIC_LOGGING_SPEC=INFO
+      #- FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=false
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer0.gov.catena.id
+      - CORE_PEER_ADDRESS=peer0.gov.catena.id:10051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.gov.catena.id:10052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.gov.catena.id:10051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.gov.catena.id:10051
+      - CORE_PEER_LOCALMSPID=GovMSP
+    volumes:
+        - /var/run/docker.sock:/host/var/run/docker.sock
+        - ../organizations/peerOrganizations/gov.catena.id/peers/peer0.gov.catena.id/msp:/etc/hyperledger/fabric/msp
+        - ../organizations/peerOrganizations/gov.catena.id/peers/peer0.gov.catena.id/tls:/etc/hyperledger/fabric/tls
+        - peer0.gov.catena.id:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - "10051:10051"
     networks:
       - catenaFabric 
 

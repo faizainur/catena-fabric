@@ -246,6 +246,121 @@ def createBankBOrg():
         os.path.join(caClientHomePath, "users", "User1@bankB.catena.id", "msp", "config.yaml"),
     ])
 
+def createGovOrg():
+    caClientHomePath =  os.path.join(os.getcwd(), "organizations", "peerOrganizations", "gov.catena.id")
+    os.makedirs(caClientHomePath)
+    os.environ['FABRIC_CA_CLIENT_HOME'] = caClientHomePath
+
+    tlsCertFilePath = os.path.join(os.getcwd(), "organizations", "fabric-ca", "govOrg", "tls-cert.pem")
+    subprocess.run(["fabric-ca-client", "enroll", "-u", "https://admin:adminpw@localhost:10054",
+                    "--caname", "ca-govOrg", "--tls.certfiles", tlsCertFilePath])
+    
+    configYamlPath = os.path.join(os.getcwd(), caClientHomePath, "msp", "config.yaml")
+    configNodeOUs = """NodeOUs:
+  Enable: true
+  ClientOUIdentifier:
+    Certificate: cacerts/localhost-10054-ca-govOrg.pem
+    OrganizationalUnitIdentifier: client
+  PeerOUIdentifier:
+    Certificate: cacerts/localhost-10054-ca-govOrg.pem
+    OrganizationalUnitIdentifier: peer
+  AdminOUIdentifier:
+    Certificate: cacerts/localhost-10054-ca-govOrg.pem
+    OrganizationalUnitIdentifier: admin
+  OrdererOUIdentifier:
+    Certificate: cacerts/localhost-10054-ca-govOrg.pem
+    OrganizationalUnitIdentifier: orderer
+    """
+
+    # subprocess.run(["echo", configNodeOUs, ">", configYamlPath])
+    configFile = open(configYamlPath, "w+")
+    configFile.write(configNodeOUs)
+    configFile.close()
+
+    # Registering peer0
+    registerCa("ca-govOrg", "peer0", "peer0pw", "peer", tlsCertFilePath)
+
+    # Registering peer0
+    registerCa("ca-govOrg", "user1", "user1pw", "client", tlsCertFilePath)
+
+    # Registering peer0
+    registerCa("ca-govOrg", "adminGov", "adminGovpw", "admin", tlsCertFilePath)
+
+    # Generate peer0 MSP
+    generateMsp("https://peer0:peer0pw@localhost:10054", "ca-govOrg",
+                os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "msp"),
+                "peer0.gov.catena.id",
+                tlsCertFilePath)
+    subprocess.run(["cp", 
+        os.path.join(caClientHomePath, "msp", "config.yaml"),
+        os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "msp", "config.yaml"),
+    ])
+
+    # Generate peer0 TLS Certificates
+    generateTlsCert("https://peer0:peer0pw@localhost:10054", "ca-govOrg",
+                os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls"),
+                "tls",
+                "peer0.gov.catena.id",
+                "localhost",
+                tlsCertFilePath)
+    
+#    shutil.copyfile(
+#         os.path.join(caClientHomePath, "peers", "peer0.bankA.catena.id", "tls", "tlscacerts"),
+#    )
+
+    subprocess.run(["cp", 
+        getFileFromDir(os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls", "tlscacerts")),
+        os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls", "ca.crt"),
+    ])
+
+    subprocess.run(["cp", 
+        getFileFromDir(os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls", "signcerts")),
+        os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls", "server.crt"),
+    ])
+    
+    subprocess.run(["cp", 
+        getFileFromDir(os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls", "keystore")),
+        os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls", "server.key"),
+    ])
+
+    os.makedirs(os.path.join(caClientHomePath, "msp", "tlscacerts"))
+    subprocess.run(["cp", 
+        getFileFromDir(os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls", "tlscacerts")),
+        os.path.join(caClientHomePath, "msp", "ca.crt"),
+    ])
+
+    os.makedirs(os.path.join(caClientHomePath, "tlsca"))
+    subprocess.run(["cp", 
+        getFileFromDir(os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "tls", "tlscacerts")),
+        os.path.join(caClientHomePath, "tlsca", "tlsca.gov.catena.id-cert.pem"),
+    ])
+
+    os.makedirs(os.path.join(caClientHomePath, "ca"))
+    subprocess.run(["cp", 
+        getFileFromDir(os.path.join(caClientHomePath, "peers", "peer0.gov.catena.id", "msp", "cacerts")),
+        os.path.join(caClientHomePath, "ca", "ca.gov.catena.id-cert.pem"),
+    ])
+
+    # Generating adminBankA MSP
+    generateMsp("https://adminGov:adminGovpw@localhost:10054", "ca-govOrg",
+                os.path.join(caClientHomePath, "users", "AdminGov@gov.catena.id", "msp"),
+                None,
+                tlsCertFilePath)
+    subprocess.run(["cp", 
+        os.path.join(caClientHomePath, "msp", "config.yaml"),
+        os.path.join(caClientHomePath, "users", "AdminGov@gov.catena.id", "msp", "config.yaml"),
+    ])
+
+    # Generating user1 MSP
+    generateMsp("https://user1:user1pw@localhost:10054", "ca-govOrg",
+                os.path.join(caClientHomePath, "users", "User1@gov.catena.id", "msp"),
+                None,
+                tlsCertFilePath)
+    subprocess.run(["cp", 
+        os.path.join(caClientHomePath, "msp", "config.yaml"),
+        os.path.join(caClientHomePath, "users", "User1@gov.catena.id", "msp", "config.yaml"),
+    ])
+
 def createOrderer():
     caClientHomePath =  os.path.join(os.getcwd(), "organizations", "ordererOrganizations", "catena.id")
     os.makedirs(caClientHomePath)

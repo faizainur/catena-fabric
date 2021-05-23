@@ -43,3 +43,12 @@ CAPEM=organizations/peerOrganizations/bankB.catena.id/ca/ca.bankB.catena.id-cert
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/bankB.catena.id/connection-bankB.json
 echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/bankB.catena.id/connection-bankB.yaml
+
+ORG=gov
+P0PORT=10051
+CAPORT=10054
+PEERPEM=organizations/peerOrganizations/gov.catena.id/tlsca/tlsca.gov.catena.id-cert.pem
+CAPEM=organizations/peerOrganizations/gov.catena.id/ca/ca.gov.catena.id-cert.pem
+
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/gov.catena.id/connection-gov.json
+echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/gov.catena.id/connection-gov.yaml
