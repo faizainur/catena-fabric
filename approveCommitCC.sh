@@ -5,7 +5,7 @@ export FABRIC_CFG_PATH=${PWD}/config
 
 # Export chaincode package id
 # input here
-export CC_PACKAGE_ID=cckyc_1.0:97c90140852c09f85bdc914fa94e6d09d0528fa2310daaf39d94d0a11bb6d967
+export CC_PACKAGE_ID=
 
 # Approve chaincode definition
 export CORE_PEER_TLS_ENABLED=true
@@ -39,6 +39,6 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/gov.ca
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/gov.catena.id/users/AdminGov@gov.catena.id/msp
 export CORE_PEER_ADDRESS=localhost:10051
 
-peer lifecycle chaincode checkcommitreadiness --channelID userprofileschannel --name cckyc --version 1.0 --sequence 1 --tls --cafile "${PWD}/organizations/ordererOrganizations/catena.id/orderers/orderer.catena.id/msp/tlscacerts/tlsca.catena.id-cert.pem" --output json
+peer lifecycle chaincode checkcommitreadiness --channelID userprofileschannel --name cckyc --version 1.1 --sequence 1 --tls --cafile "${PWD}/organizations/ordererOrganizations/catena.id/orderers/orderer.catena.id/msp/tlscacerts/tlsca.catena.id-cert.pem" --output json
 
 peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.catena.id --channelID userprofileschannel --name cckyc --version 1.0 --sequence 1 --tls --cafile "${PWD}/organizations/ordererOrganizations/catena.id/orderers/orderer.catena.id/msp/tlscacerts/tlsca.catena.id-cert.pem" --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/bankA.catena.id/peers/peer0.bankA.catena.id/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/bankB.catena.id/peers/peer0.bankB.catena.id/tls/ca.crt" --peerAddresses localhost:10051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/gov.catena.id/peers/peer0.gov.catena.id/tls/ca.crt"
