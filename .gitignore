@@ -2,6 +2,8 @@ bin/
 
 *.tar.gz
 
+channel-artifacts/
+
 chaincodes/asset-transfer-basic
 chaincodes/test-application
 
