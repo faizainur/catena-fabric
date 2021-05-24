@@ -13,10 +13,10 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/gov.ca
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/gov.catena.id/users/AdminGov@gov.catena.id/msp
 export CORE_PEER_ADDRESS=localhost:10051
 
-peer lifecycle chaincode package cckyc.tar.gz --path chaincodes/cckyc --lang golang --label cckyc_1.0
+peer lifecycle chaincode package cckyc2.tar.gz --path chaincodes/cckyc --lang golang --label cckyc2_1.0
 
 # Installing chaincode into peers
-peer lifecycle chaincode install cckyc.tar.gz
+peer lifecycle chaincode install cckyc2.tar.gz
 
 export CORE_PEER_TLS_ENABLED=true
 export CORE_PEER_LOCALMSPID="BankAMSP"
@@ -24,7 +24,7 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/bankA.
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/bankA.catena.id/users/AdminBankA@bankA.catena.id/msp
 export CORE_PEER_ADDRESS=localhost:7051
 
-peer lifecycle chaincode install cckyc.tar.gz
+peer lifecycle chaincode install cckyc2.tar.gz
 
 export CORE_PEER_TLS_ENABLED=true
 export CORE_PEER_LOCALMSPID="BankBMSP"
@@ -32,4 +32,4 @@ export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/bankB.
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/bankB.catena.id/users/AdminBankB@bankB.catena.id/msp
 export CORE_PEER_ADDRESS=localhost:9051
 
-peer lifecycle chaincode install cckyc.tar.gz
+peer lifecycle chaincode install cckyc2.tar.gz
